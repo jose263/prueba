@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Ejemplo de JavaScrpt</title>
+<script type="text/javascript">
+	
+// 	function test3ArrayAsociativos(){
+// 	var x={
+// 		"a":7,
+// 		"b":"hola",
+// 		"c":false
+// 	};
+// 	alert (x + "que es de tipo " + typeof(x));
+// 	alert ("pero se comporta como un array " + x["b"]);
+	
+// 	var x={
+// 			"a":7,
+// 			"b":"hola",
+// 			"c":{
+// 				"0":"elemento",
+// 				"1":false
+// 			}
+// 		};
+// 		alert (x + "que es de tipo " + typeof(x));
+// 		alert ("pero se comporta como un array " + x["c"][0]);
+// 		alert ("admite notacion de objetos " + x.b);
+// 		document.write ("admite notacion de objetos " + x.c[0]);
+// 	}
+	
+// 	function test2Tipos(){
+// 	alert (typeof(3));
+// 	alert (typeof("HOLA"));
+// 	alert (typeof(4.5));
+// 	alert (typeof('a'));
+// 	alert (typeof(true));
+// 	alert (typeof(null));
+// 	alert (typeof(x));
+// 	alert (typeof([]));
+// 	alert (typeof({}));  
+// 	}
+// 	function test1Variables(){	
+// 	var x, y, z;
+// 	x = 3;
+// 	y = "hOLA";
+// 	z = false;
+	
+// 	x = 'a';
+// 	y = 7.8;
+// 	z = [3,6,9];
+	
+// 	alert("valores: " + x + " " + y + " "+ z);
+// 	alert("Tipos: " + typeof(x) + "," + typeof(y) + "," + typeof(z) );
+	
+// 	var a = 7;
+// 	var b = "7";
+	
+// 	if(a==b)	alert("iguales");
+// 	else	alert("distintos");
+	
+// 	if(a===b)	alert("iguales");
+// 	else	alert("distintos");
+	
+// 	}	
+
+// 	alert (typeof(test3ArrayAsociativos));
+// 	alert (test3ArrayAsociativos);
+	
+// 	var y = function y (nombre, edad) {
+// 		//nombre =(nombre == undefined) ? "defecto" : nombre;
+// 		//nombre = (nombre) ? nombre : "defecto";
+// 		nombre = nombre || "Defecto";
+		
+// 		//edad = (edad == undefined)? 0 : edad;
+// 		//edad = (edad) ? edad : 0;
+// 		edad = edad || 0;
+// 	alert (arguments[2]+ "" + arguments[3])	
+// 	return "hola " + nombre + "tienes " + edad + "años";
+// 	}
+	
+// 	//alert (y);
+// 	alert (y("",0,23,"jose"));
+
+// 	x = 5;
+// 	y = 9;
+// 	function f(){
+// 		alert(x + " " + y);
+// 		x = "Hola";
+// 		y = "Adios";
+// 		alert (x + " " + y);
+// 	}
+// 	f();
+// 	alert (x + " "+ y);
+
+
+// 	x = 5;
+// 	var y = 9;
+// 	f = function(){
+// 		alert(x + " " + y);
+// 		var x = "Hola";
+// 		var y = "Adios";
+// 		alert (x + " " + y);
+// 	}
+	
+// 	f();
+// 	alert (x + " " + y);
+	function pintarReloj(){
+		//voy a pintar un reloj en la pagina
+		var p = document.getElementById("reloj");
+		var fecha = new Date();
+		p.innerHTML = fecha.toTimeString();
+	}
+	function iniciarReloj() {
+		// cada segundo se ejecuta la funcion
+		//setInterval(pintarReloj,1000); //milisegundos	
+		idInterval = setInterval(pintarReloj, 1000);
+	}
+	 	//setTimeout(iniciarReloj, 5000);
+	 	var idTimeout = setTimeout(iniciarReloj, 2000);
+	 	
+	//puedo ejecutar funciones
+	function parar(){
+		
+		clearTimeout (idTimeout);
+		clearInterval(idInterval);
+	}
+ 	setTimeout(parar, 5000);
+ 	
+	function operar(x,y,operacion,error){
+		try {
+			operacion(x,y);
+		} catch (e) {
+			error(e);
+		}
+		
+	}
+	
+	function excepcion(e){
+		alert ("Se ha producido una excepcion " + e);
+	}
+	
+	function mensaje(){
+		alert("hola " + arguments[0]);
+		
+	}
+	function sumar(x,y) {
+		if (isNaN(x)|| isNaN(y)){
+			throw  new Error("tIENEN QUE SER ENTEROS")
+		}
+		
+	}
+	function dividir(x,y) {
+		var r= x/y;
+		if (isNaN(r)){
+			throw new Error("NaN");
+		}
+	}
+	
+	function dom() {
+		alert (document.body.innerHTML);
+		document.body.innerHTML += "<b>Hola</b>";
+		document.body.innerHTML += '<img alt="Mafalda" src="C:\Documents and Settings\insa01\Escritorio\Mafalda.JPEG"/>';
+		var imagen = document.createElement("img");
+		imagen.src = "C:\Documents and Settings\insa01\Escritorio\Mafalda.JPEG";
+		document.body.appendChild(imagen);
+		imagen.onmouseover= function(){
+			var input = document.body.lastChild;
+			caja.value = "dentro";
+		};
+		var input = document.createElement("input");
+		input.type = "button";
+		input.value = "Pulsame";
+		input.id = "caja";
+		input.name = "x",
+		input.onclick = function(){
+			alert("hola");
+		};
+		document.body.appendChild(input);
+		
+	}
+	
+	</script>
+</head>
+el body contiene un boton
+<br/>
+<body>
+	<p>
+	<input id="x"/><input id="y"/>
+	<br/>
+	<input type="button" value="Sumar" onclick="operar('a',4,sumar,mensaje)"/>
+	<input type="button" value="Dividir" onclick="operar(0,'a',dividir,excepcion)"/>
+
+	//<input type="button" onclick="dom()" value="clickame" />
+	pulsalo y verás
+	<p id="reloj"> aqui voy a pintar un reloj</p>
+</body>
+</html>
+
